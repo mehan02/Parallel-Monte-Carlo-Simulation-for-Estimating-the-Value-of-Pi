@@ -1,9 +1,6 @@
 # SE3082 - Assignment 03
 ## Parallel Monte Carlo Simulation for Estimating the Value of Pi
 
-**Course:** SE3082 - Parallel and Distributed Computing  
-**Student:** [Your Name]  
-**Program:** BSc (Hons) Information Technology - Year 3
 
 ---
 
@@ -21,7 +18,7 @@ SE3082_Assignment03_MonteCarlo_Pi/
 │   ├── pi_mpi.c         # Source code
 │   └── Makefile         # Build script
 ├── cuda/                # CUDA (GPU parallel) implementation
-│   └── pi_cuda.cu       # Source code (run on Google Colab)
+│   └── pi_cuda.cu        (run on Google Colab)
 ├── analysis/            # Performance analysis tools
 │   └── plot_results.py  # Python script to generate graphs
 ├── results/             # Experimental results
@@ -30,11 +27,8 @@ SE3082_Assignment03_MonteCarlo_Pi/
 │   ├── openmp_*.csv     # OpenMP run outputs
 │   ├── mpi_*.csv        # MPI run outputs
 │   └── *.png            # Generated performance graphs
-├── report/              # Assignment report
-│   ├── SE3082_MonteCarlo_Pi_Report.md
 │   └── *.png            # Graphs for report
-├── README.md            # This file
-└── .gitignore           # Git ignore rules
+├── README.md                    
 ```
 
 ---
@@ -75,7 +69,7 @@ SE3082_Assignment03_MonteCarlo_Pi/
 
 ---
 
-## How to Run from Scratch (Step by Step)
+## How to Run 
 
 ### Prerequisites
 ```bash
@@ -129,7 +123,7 @@ mpirun -np 4 ./pi_mpi 10000000    # 4 processes
 ```python
 # Cell 2: Create CUDA file
 %%writefile pi_cuda.cu
-# (paste contents of cuda/pi_cuda.cu here)
+# (contents of cuda/pi_cuda.cu)
 ```
 
 ```python
@@ -152,24 +146,13 @@ openmp,4,0.095,10000000,3.1409,0.0006
 ### Step 6: Generate Performance Graphs
 ```bash
 cd analysis
-pip3 install pandas matplotlib   # if not installed
+pip3 install pandas matplotlib   
 python3 plot_results.py
 # Graphs saved to results/*.png
 ```
 
 ---
-
-## How Graph Generation Works
-
-The `analysis/plot_results.py` script:
-
-1. **Reads** `results/summary.csv`
-2. **Extracts** serial baseline time for speedup calculation
-3. **For each mode** (openmp, mpi):
-   - Calculates speedup = serial_time / parallel_time
-   - Creates **Time vs Workers** graph
-   - Creates **Speedup vs Workers** graph
-4. **Saves** PNG files to `results/` folder
+ 
 
 **Generated graphs:**
 - `openmp_time.png` - OpenMP execution time vs thread count
@@ -179,26 +162,7 @@ The `analysis/plot_results.py` script:
 
 ---
 
-## Output CSV Format
-
-All implementations output in consistent CSV format:
-
-```
-MODE,SERIAL|OPENMP|MPI|CUDA
-SAMPLES,<number>
-THREADS,<number>           # OpenMP only
-PROCESSES,<number>         # MPI only
-BLOCKS,<number>            # CUDA only
-THREADS_PER_BLOCK,<number> # CUDA only
-INSIDE,<count>
-PI,<estimated_value>
-ERROR,<absolute_error>
-TIME,<seconds>
-```
-
----
-
-## Quick Test (Verify Everything Works)
+## Quick Test to Verify Everything Works
 
 ```bash
 # From project root
@@ -219,4 +183,4 @@ Expected output: Each shows `PI,3.14xxxxx` with small ERROR.
 | OpenMP | 4 | 0.095 | 2.72x |
 | MPI | 4 | 0.100 | 2.60x |
 
-*Tested on Apple M1 (8-core)*
+ 
